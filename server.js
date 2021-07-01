@@ -49,6 +49,4 @@ app.get('/api/notes', (req, res) => {
 // );
 // console.log(uniqid());
 
-
-// Set up server to listen for requests
-//app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
+app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
