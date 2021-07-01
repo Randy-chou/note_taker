@@ -35,19 +35,35 @@ app.get('/api/notes', (req, res) => {
     );
 });
 
+// TODO: instead of writing the new note, append to the exiting notes and then write the array
 app.post('/api/notes', (req, res) => {
     const newNote = req.body;
     newNote.id = uniqid();
-    fs.writeFile('./db/db.json', JSON.stringify(newNote, null, '    '), (err) =>
-        err ? console.error(err) : console.log('Success!')
-    );
-    res.json(newNote);
-})
+    let noteArray;
 
-// Data read and write to database
-// fs.writeFile('./db/db.json', JSON.stringify(test, null, '    '), (err) =>
-//     err ? console.error(err) : console.log('Success!')
-// );
-// console.log(uniqid());
+    fs.readFile('./db/db.json', 'utf8', (error, data) => {
+        if (error) {
+            console.error(error)
+        } else {
+            tempArray = JSON.parse(data);
+            tempArray.push(newNote);
+            fs.writeFile('./db/db.json', JSON.stringify(tempArray, null, '    '), (err) =>
+                err ? console.error(err) : console.log('Success!')
+            )
+        }
+    })
+    res.json(newNote);
+});
+
+app.delete('/api/notes/:id', (req,res) => {
+    
+});
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
+// [
+//     {
+//         "title": "this",
+//         "text": "is",
+//         "id": "3frng88okqkiiijx"
+//     }
+// ]

@@ -1,5 +1,22 @@
-{
-    "title": "this",
-    "text": "is",
-    "id": "3frng88okqkiiijx"
-}
+[
+    {
+        "title": "this",
+        "text": "is",
+        "id": "3frng88okqkiiijx"
+    },
+    {
+        "title": "this",
+        "text": "is",
+        "id": "3frng88okqkiiijx"
+    },
+    {
+        "title": "Hey",
+        "text": "Now",
+        "id": "3frngkawkqlirzcb"
+    },
+    {
+        "title": "Add new note",
+        "text": "This is a longer description to test stuff",
+        "id": "3frngkawkqlispbq"
+    }
+]
