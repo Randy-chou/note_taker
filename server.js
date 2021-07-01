@@ -35,13 +35,14 @@ app.get('/api/notes', (req, res) => {
     );
 });
 
-// app.post('/api/notes', (req, res) => {
-//     const newNote = req.body;
-//     newNote.id = uniqid();
-//     fs.writeFile('./db/db.json', JSON.stringify(newNote, null, '    '), (err) =>
-//         err ? console.error(err) : console.log('Success!')
-//     );
-// })
+app.post('/api/notes', (req, res) => {
+    const newNote = req.body;
+    newNote.id = uniqid();
+    fs.writeFile('./db/db.json', JSON.stringify(newNote, null, '    '), (err) =>
+        err ? console.error(err) : console.log('Success!')
+    );
+    res.json(newNote);
+})
 
 // Data read and write to database
 // fs.writeFile('./db/db.json', JSON.stringify(test, null, '    '), (err) =>
