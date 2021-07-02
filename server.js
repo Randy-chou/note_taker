@@ -48,22 +48,29 @@ app.post('/api/notes', (req, res) => {
             tempArray = JSON.parse(data);
             tempArray.push(newNote);
             fs.writeFile('./db/db.json', JSON.stringify(tempArray, null, '    '), (err) =>
-                err ? console.error(err) : console.log('Success!')
+                err ? console.error(err) : res.json(newNote)
             )
         }
     })
-    res.json(newNote);
 });
 
 app.delete('/api/notes/:id', (req,res) => {
-    
+    const chosenID = req.params.id;
+    fs.readFile('./db/db.json', 'utf8', (error, data) => {
+        if (error) {
+            console.error(error)
+        } else {
+            tempArray = JSON.parse(data);
+            for (let i = 0; i < tempArray.length; i++) {
+                if (chosenID === tempArray[i].id) {
+                  tempArray.splice(i,1);
+                }
+            }
+            fs.writeFile('./db/db.json', JSON.stringify(tempArray, null, '    '), (err) =>
+                err ? console.error(err) : res.end()
+            )
+        }
+    })
 });
 
-app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
-// [
-//     {
-//         "title": "this",
-//         "text": "is",
-//         "id": "3frng88okqkiiijx"
-//     }
-// ]
+app.listen(PORT, () => console.log(`App listening on PORT http://localhost:${PORT}`));
